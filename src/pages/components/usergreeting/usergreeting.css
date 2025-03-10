@@ -1,0 +1,36 @@
+.usergreeting-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 324px;
+    padding-right: 324px;
+    background-color: #01121f;
+    height: 80px;
+}
+
+.usergreeting-greeting {
+    font-size: 18px;
+    color: #333;
+}
+
+.usergreeting-role {
+    font-size: 16px;
+    color: #555;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 500px) {
+
+    .usergreeting-container {
+        padding: 0;
+        flex-wrap: wrap;
+    }
+
+    .usergreeting-greeting {
+       width: 100%;
+    }
+
+    .usergreeting-role{
+        width: 100%;
+    }
+}

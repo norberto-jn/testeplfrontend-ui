@@ -1,0 +1,27 @@
+# Dependências do Node.js
+node_modules/
+
+# Saída de build do Vite
+dist/
+
+# Cache do Vite
+.vite/
+
+# Arquivos de ambiente locais
+.env.local
+.env.*.local
+
+# Arquivos de log
+*.log
+
+# Diretórios e arquivos específicos de editores
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Arquivos específicos do sistema operacional
+.DS_Store
+Thumbs.db
