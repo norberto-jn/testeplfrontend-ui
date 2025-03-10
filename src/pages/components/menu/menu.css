@@ -1,0 +1,37 @@
+.menu-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 324px;
+    padding-right: 324px;
+    background-color: #01121f;
+    border-bottom: 1px solid rgba(221, 221, 221, 0.1);
+    height: 80px;
+}
+
+.menu-logo {
+    height: 100px;
+}
+
+.menu-logout-button {
+    padding: 10px 20px;
+    background-color: #021a30;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+
+    .menu-container{
+        padding: 0;
+        border-bottom: none;
+        background-color: #021A30;
+    }
+
+    .menu-logo {
+        height: 120px;
+    }
+    
+}

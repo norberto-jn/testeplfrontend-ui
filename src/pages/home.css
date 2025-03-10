@@ -1,0 +1,25 @@
+.homeContainer {
+    background-color: #021A30;
+    min-height: 100vh;
+    color: #fff;
+}
+
+.content {
+    padding-left: 324px;
+    padding-right: 324px;
+    padding-top: 20px;
+}
+
+.text {
+    text-align: left;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+@media screen and (max-width: 500px) {
+
+    .content {
+        padding: 0;
+    }
+}
