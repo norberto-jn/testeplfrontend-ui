@@ -1,3 +1,50 @@
+## Passo a Passo para Rodar o Projeto em Sua Máquina
+
+1. **Criação do diretório para o projeto:**  
+   Crie uma pasta onde o front-end será armazenado:  
+   ```bash
+   mkdir project02
+   ```
+
+2. **Acessar o diretório criado:**  
+   Entre na pasta `project02`:  
+   ```bash
+   cd project02
+   ```
+
+3. **Clonar o repositório do projeto:**  
+   Clone o repositório do front-end:  
+   ```bash
+   git clone https://github.com/norberto-jn/testeplfrontend-ui.git
+   ```
+
+4. **Copiar o arquivo `docker-compose.yaml`:**  
+   Copie o arquivo `docker-compose.yaml` do repositório clonado (`testeplfrontend-ui`) e cole-o na raiz do diretório `project02`.
+
+5. **Rodar o Docker Compose:**  
+   Dentro da pasta `project02`, execute o comando:  
+   ```bash
+   docker compose up -d
+   ```
+
+6. **Instalar Docker Compose (caso necessário):**  
+   Caso o Docker Compose não esteja instalado em sua máquina, siga o tutorial de instalação oficial [aqui](https://docs.docker.com/compose/install/).
+
+7. **Verificar se o projeto está rodando:**  
+   Após o Docker Compose subir o container, verifique o status do projeto com:  
+   ```bash
+   docker compose ps
+   ```
+
+8. **Acessar a aplicação no navegador:**  
+   Abra um navegador de sua preferência e acesse a URL:  
+   ```
+   http://localhost:5172/auth/login
+   ```
+
+Após seguir esses passos, o projeto deve estar rodando corretamente. Se encontrar algum problema, entre em contato!
+
+
 ## INSTRUÇÕES PARA O TESTE TÉCNICO
 
 - Crie um fork deste projeto (https://github.com/CAPYS-IT/TestePlenoFrontend).
