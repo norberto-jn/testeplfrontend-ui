@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Importando useState
+import React, { useState } from 'react';
 import { Bounce, ToastContainer } from 'react-toastify';
 import 'semantic-ui-css/semantic.min.css';
 import { Button, Form, FormField } from 'semantic-ui-react';
@@ -8,7 +8,6 @@ import './signupform.css';
 import { useNavigate } from 'react-router-dom';
 
 const SignUpForm: React.FC = () => {
-
     const [nome, setNome] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [senha, setSenha] = useState<string>('');
@@ -48,15 +47,19 @@ const SignUpForm: React.FC = () => {
             });
 
             if (response.ok) {
-                toastContainerCP(ToastTypeEnum.SUCCESS, 'Conta criada com sucesso!');
-                setNome('');
-                setEmail('');
-                setSenha('');
-                setConfirmarSenha('');
-                setBio('');
-                setContato('');
-                setCargo('');
-                navigate('/auth/login');
+                // Exibe o toast de sucesso e define a função onClose
+                toastContainerCP(ToastTypeEnum.SUCCESS, 'Conta criada com sucesso!', () => {
+                    // Limpa os estados
+                    setNome('');
+                    setEmail('');
+                    setSenha('');
+                    setConfirmarSenha('');
+                    setBio('');
+                    setContato('');
+                    setCargo('');
+                    // Navega para a página de login
+                    navigate('/auth/login');
+                });
             } else {
                 const errorData = await response.json();
                 toastContainerCP(ToastTypeEnum.ERROR, errorData.message || 'Erro ao cadastrar. Tente novamente.');
@@ -70,7 +73,6 @@ const SignUpForm: React.FC = () => {
         <>
             <div className="signupform-container">
                 <div>
-
                     <div className="signupform-header">
                         <img src="/logo_capys.png" alt="Logo" className="signupform-logo" />
                         <Button className="signupform-header-button" onClick={() => navigate('/auth/login')}>
