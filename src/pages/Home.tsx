@@ -1,17 +1,30 @@
-import { useNavigate } from 'react-router-dom'
-import Menu from "./components/menu/Menu"
-import UserGreeting from "./components/usergreeting/UserGreeting"
-import './home.css'
+import { useNavigate } from 'react-router-dom';
+import Menu from './components/menu/Menu';
+import UserGreeting from './components/usergreeting/UserGreeting';
+import './home.css';
 
 const Home = () => {
+    const navigate = useNavigate();
 
-    const navigate = useNavigate()
-    const handleLogout = () =>  navigate('/auth/login')
-    
+    // Recupera os valores do localStorage
+    const userName = localStorage.getItem('name') || 'Usuário'; // Fallback para 'Usuário' se não houver nome
+    const userRole = localStorage.getItem('job') || 'Cargo'; // Fallback para 'Cargo' se não houver job
+
+    const handleLogout = () => {
+        // Limpa os dados do localStorage ao fazer logout
+        localStorage.removeItem('token');
+        localStorage.removeItem('name');
+        localStorage.removeItem('job');
+
+        // Redireciona para a página de login
+        navigate('/auth/login');
+    };
+
     return (
         <div className="homeContainer">
             <Menu onLogout={handleLogout} />
-            <UserGreeting userName="Norberto" userRole="Desenvolvedor" />
+            {/* Passa os valores recuperados para o componente UserGreeting */}
+            <UserGreeting userName={userName} userRole={userRole} />
             <div className="content">
                 <p className="text">
                     Que pena! Estamos em desenvolvimento :(
@@ -21,7 +34,7 @@ const Home = () => {
                 </p>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;

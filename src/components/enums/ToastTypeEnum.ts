@@ -1,6 +1,6 @@
 enum ToastTypeEnum {
     SUCCESS = 'SUCCESS',
-    ERRO = 'ERRO'
+    ERROR = 'ERRO'
 }
 
 export default ToastTypeEnum

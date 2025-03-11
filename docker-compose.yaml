@@ -6,6 +6,18 @@ networks:
 
 services :
 
+  testeplbackend-api :
+    build:
+      context: ./testeplbackend-api
+      dockerfile: Dockerfile.dev
+    container_name: testeplbackend-api
+    restart: always
+    volumes:
+      - ./testeplbackend-api:/src/apiToDo
+    ports:
+      - "5171:8080"
+      - "5170:8181" 
+
   testeplfrontend-ui :
     build:
       context: ./testeplfrontend-ui

@@ -4,11 +4,11 @@ import 'semantic-ui-css/semantic.min.css';
 import { Button, Form, FormField } from 'semantic-ui-react';
 import toastContainerCP from '../../../components/ToastContainer';
 import ToastTypeEnum from '../../../components/enums/ToastTypeEnum';
-import './signupform.css'; // Importando o arquivo CSS
+import './signupform.css';
 import { useNavigate } from 'react-router-dom';
 
 const SignUpForm: React.FC = () => {
-    // Estados para armazenar os valores dos inputs
+
     const [nome, setNome] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [senha, setSenha] = useState<string>('');
@@ -18,30 +18,37 @@ const SignUpForm: React.FC = () => {
     const [cargo, setCargo] = useState<string>('');
     const navigate = useNavigate();
 
-    // Função para lidar com o envio do formulário
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault(); // Evita o recarregamento da página
+    // Opções de cargo
+    const cargos = ['Desenvolvedor', 'RH'];
 
-        // Verifica se as senhas coincidem
-        if (/*senha !== confirmarSenha*/false) {
-            alert('As senhas não coincidem!');
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        if (senha !== confirmarSenha) {
+            toastContainerCP(ToastTypeEnum.ERROR, 'As senhas não coincidem!');
             return;
         }
 
-        // Dados a serem enviados para a API
         const dados = {
-            nome,
-            email,
-            senha,
-            bio,
-            contato,
-            cargo,
+            name: nome,
+            email: email,
+            password: senha,
+            bio: bio,
+            phone: contato,
+            job: cargo,
         };
 
         try {
-            if (true) {
-                toastContainerCP(ToastTypeEnum.SUCCESS);
-                // Limpa os campos do formulário
+            const response = await fetch('http://localhost:5171/people', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dados),
+            });
+
+            if (response.ok) {
+                toastContainerCP(ToastTypeEnum.SUCCESS, 'Conta criada com sucesso!');
                 setNome('');
                 setEmail('');
                 setSenha('');
@@ -49,12 +56,13 @@ const SignUpForm: React.FC = () => {
                 setBio('');
                 setContato('');
                 setCargo('');
+                navigate('/auth/login');
             } else {
-                alert('Erro ao cadastrar. Tente novamente.');
+                const errorData = await response.json();
+                toastContainerCP(ToastTypeEnum.ERROR, errorData.message || 'Erro ao cadastrar. Tente novamente.');
             }
         } catch (error) {
-            console.error('Erro na requisição:', error);
-            alert('Erro na conexão com o servidor.');
+            toastContainerCP(ToastTypeEnum.ERROR, `Erro na requisição: ${error}`);
         }
     };
 
@@ -62,7 +70,7 @@ const SignUpForm: React.FC = () => {
         <>
             <div className="signupform-container">
                 <div>
-                    {/* Cabeçalho com logo e botão de voltar */}
+
                     <div className="signupform-header">
                         <img src="/logo_capys.png" alt="Logo" className="signupform-logo" />
                         <Button className="signupform-header-button" onClick={() => navigate('/auth/login')}>
@@ -70,7 +78,6 @@ const SignUpForm: React.FC = () => {
                         </Button>
                     </div>
 
-                    {/* Formulário */}
                     <div className="signupform-form-card">
                         <div className="signupform-form-title">Crie sua conta</div>
                         <div className="signupform-form-subtitle">Rápido e grátis, vamos nessa</div>
@@ -90,6 +97,7 @@ const SignUpForm: React.FC = () => {
                             <FormField>
                                 <label className="signupform-form-label">Email</label>
                                 <input
+                                    type='email'
                                     placeholder='Email'
                                     className="signupform-form-input"
                                     value={email}
@@ -146,13 +154,19 @@ const SignUpForm: React.FC = () => {
 
                             <FormField>
                                 <label className="signupform-form-label">Selecionar Cargo</label>
-                                <input
-                                    placeholder='Cargo'
+                                <select
                                     className="signupform-form-input"
                                     value={cargo}
                                     onChange={(e) => setCargo(e.target.value)}
                                     required
-                                />
+                                >
+                                    <option value="">Selecione um cargo</option>
+                                    {cargos.map((cargoOption, index) => (
+                                        <option key={index} value={cargoOption}>
+                                            {cargoOption}
+                                        </option>
+                                    ))}
+                                </select>
                             </FormField>
 
                             <Button type='submit' className="signupform-form-button">Cadastrar</Button>

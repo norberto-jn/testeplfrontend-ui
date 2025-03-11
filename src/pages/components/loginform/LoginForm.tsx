@@ -1,52 +1,48 @@
-import React, { useState } from 'react'; // Importando useState
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Bounce, ToastContainer } from 'react-toastify';
 import 'semantic-ui-css/semantic.min.css';
 import { Button, Form, FormField } from 'semantic-ui-react';
 import toastContainerCP from '../../../components/ToastContainer';
 import ToastTypeEnum from '../../../components/enums/ToastTypeEnum';
-import './loginform.css'; // Importando o arquivo CSS
+import './loginform.css';
 
 const LoginForm: React.FC = () => {
-    // Estados para armazenar os valores dos inputs
-    const [nome, setNome] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [senha, setSenha] = useState<string>('');
-    const [confirmarSenha, setConfirmarSenha] = useState<string>('');
-    const [bio, setBio] = useState<string>('');
-    const [contato, setContato] = useState<string>('');
-    const [cargo, setCargo] = useState<string>('');
     const navigate = useNavigate();
 
-    // Função para lidar com o envio do formulário
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const dados = {
-            nome,
             email,
-            senha,
-            bio,
-            contato,
-            cargo,
+            password: senha,
         };
 
         try {
-            if (true) {
-                toastContainerCP(ToastTypeEnum.SUCCESS);
-                setNome('');
-                setEmail('');
-                setSenha('');
-                setConfirmarSenha('');
-                setBio('');
-                setContato('');
-                setCargo('');
+            const response = await fetch('http://localhost:5171/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dados),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('name', data.name);
+                localStorage.setItem('job', data.job);
+
+                navigate('/home');
             } else {
-                alert('Erro ao cadastrar. Tente novamente.');
+                toastContainerCP(ToastTypeEnum.ERROR, data.message || 'Erro ao fazer login!');
             }
         } catch (error) {
             console.error('Erro na requisição:', error);
-            alert('Erro na conexão com o servidor.');
+            toastContainerCP(ToastTypeEnum.ERROR, 'Erro ao conectar ao servidor!');
         }
     };
 
@@ -54,12 +50,10 @@ const LoginForm: React.FC = () => {
         <>
             <div className="loginform-container">
                 <div>
-                    {/* Cabeçalho com logo e botão de voltar */}
                     <div className="loginform-header">
                         <img src="/logo_2.png" alt="Logo" className="loginform-logo" />
                     </div>
 
-                    {/* Formulário */}
                     <div className="loginform-form-card">
                         <div className="loginform-form-title">Login</div>
 

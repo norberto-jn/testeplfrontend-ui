@@ -1,48 +1,54 @@
 ## Passo a Passo para Rodar o Projeto em Sua Máquina
 
-1. **Criação do diretório para o projeto:**  
-   Crie uma pasta onde o front-end será armazenado:  
+1. **Criação do diretório para o projeto:**
+   Crie uma pasta onde o back-end e o front-end serão colocados:
    ```bash
    mkdir project02
    ```
 
-2. **Acessar o diretório criado:**  
-   Entre na pasta `project02`:  
+2. **Acessar o diretório criado:**
+   Entre na pasta `project`:
    ```bash
    cd project02
    ```
 
-3. **Clonar o repositório do projeto:**  
-   Clone o repositório do front-end:  
+3. **Clonar os repositórios do projeto:**
+   Agora, clone os dois repositórios (back-end e front-end):
    ```bash
-   git clone https://github.com/norberto-jn/testeplfrontend-ui.git
+   git clone https://github.com/norberto-jn/testeplbackend-api
+   git clone https://github.com/norberto-jn/testeplfrontend-ui
    ```
 
-4. **Copiar o arquivo `docker-compose.yaml`:**  
-   Copie o arquivo `docker-compose.yaml` do repositório clonado (`testeplfrontend-ui`) e cole-o na raiz do diretório `project02`.
+4. **Copiar o arquivo `docker-compose.yaml`:**
+   Copie o arquivo `docker-compose.yaml` de um dos repositórios (`testeplbackend-api` e `testeplfrontend-ui`) e cole-os na raiz do diretório `project02`.
 
-5. **Rodar o Docker Compose:**  
-   Dentro da pasta `project02`, execute o comando:  
+5. **Rodar o Docker Compose:**
+   Agora, dentro da pasta `project`, execute o comando:
    ```bash
    docker compose up -d
    ```
 
-6. **Instalar Docker Compose (caso necessário):**  
-   Caso o Docker Compose não esteja instalado em sua máquina, siga o tutorial de instalação oficial [aqui](https://docs.docker.com/compose/install/).
+6. **Instalar Docker Compose (caso necessário):**
+   Se você não tem o Docker Compose instalado em sua máquina, siga o tutorial de instalação oficial [aqui](https://docs.docker.com/compose/install/).
 
-7. **Verificar se o projeto está rodando:**  
-   Após o Docker Compose subir o container, verifique o status do projeto com:  
+7. **Verificar se o projeto está rodando:**
+   Após o Docker Compose subir os containers, você pode verificar o status do projeto com:
    ```bash
    docker compose ps
    ```
 
-8. **Acessar a aplicação no navegador:**  
-   Abra um navegador de sua preferência e acesse a URL:  
+8. **Acessar a aplicação no navegador:**
+   Abra um navegador de sua preferência e acesse a URL:
    ```
    http://localhost:5172/auth/login
    ```
 
-Após seguir esses passos, o projeto deve estar rodando corretamente. Se encontrar algum problema, entre em contato!
+9. **Login:**
+   Use as credenciais abaixo para fazer login:
+   - **Usuário:** norberto@gmail.com
+   - **Senha:** 123
+
+Após seguir esses passos, o seu projeto deve estar rodando corretamente. Se tiver algum problema, me avise!
 
 
 ## INSTRUÇÕES PARA O TESTE TÉCNICO
